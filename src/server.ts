@@ -23,7 +23,7 @@ return res.status(400).json({ error: 'Nome e preço são obrigatórios.' });
 try {
 // 1. Cria a tabela 'produtos-vini' se ela ainda não existir no banco
 await pool.query(`
-CREATE TABLE IF NOT EXISTS \`produtos-vini\` (
+CREATE TABLE IF NOT EXISTS \`produto\` (
 id INT AUTO_INCREMENT PRIMARY KEY,
 nome VARCHAR(255) NOT NULL,
 preco DECIMAL(10, 2) NOT NULL,
@@ -32,7 +32,7 @@ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 `);
 
 // 2. Insere o produto digitado pelo usuário
-const queryCadastro = `INSERT INTO \`produtos-vini\` (nome, preco) VALUES (?, ?)`;
+const queryCadastro = `INSERT INTO \`produto\` (nome, preco) VALUES (?, ?)`;
 await pool.query(queryCadastro, [nome, preco]);
 
 res.status(201).json({ mensagem: 'Produto inserido com sucesso!' });
@@ -53,7 +53,7 @@ if (tabelas.length === 0) {
 return res.json([]);
 }
 
-const [rows] = await pool.query('SELECT * FROM `produtos-vini` ORDER BY id DESC');
+const [rows] = await pool.query('SELECT * FROM `produto` ORDER BY id DESC');
 res.json(rows);
 } catch (error: any) {
 console.error('Erro ao buscar produtos:', error);
