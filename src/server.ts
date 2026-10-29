@@ -18,14 +18,13 @@ app.post('/usuarios', async (req, res) => {
   // 1. Validação básica de entrada
   if (!nome || !email || !senha || !cpf) {
     return res.status(400).json({ error: 'Nome, email e senha são obrigatórios.' });
-  
+  }
 
   try {
     // 2. Garante que a tabela de usuários existe
     await pool.query(`
       CREATE TABLE IF NOT EXISTS \`criar conta\` (
-       
-        CPF VARCHAR(255)
+        CPF VARCHAR(255) PRIMARY KEY,
         NOME VARCHAR(255) NOT NULL,
         E-MAIL VARCHAR(255) NOT NULL UNIQUE,
         SENHA VARCHAR(255) NOT NULL,
