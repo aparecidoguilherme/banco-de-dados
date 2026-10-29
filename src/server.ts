@@ -45,7 +45,7 @@ app.post('/usuarios', async (req, res) => {
 
 
     // 5. Salva o usuário no banco
-    const queryInsercao = 'INSERT INTO `crir conta` (NOME, E-MAIL, SENHA, CPF) VALUES (?, ?, ?, ?)';
+    const queryInsercao = 'INSERT INTO `criar conta` (NOME, E-MAIL, SENHA, CPF) VALUES (?, ?, ?, ?)';
     const [result]: any = await pool.query(queryInsercao, [nome, email, senha, cpf]);
 
     // Retorna 201 Created sem expor a senha
